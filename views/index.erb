@@ -1,0 +1,83 @@
+ <!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Temperatura</title>
+    <meta charset="utf-8">
+    <script src="//www.google.com/jsapi"></script>
+    <script src="chartkick.js"></script>
+    <script type="text/javascript">
+function loadXMLDoc() {
+req=new XMLHttpRequest();
+req.onreadystatechange=function() {
+if (req.readyState==4 && req.status==200) {
+document.getElementById("div1").innerHTML=req.responseText;
+}
+} // end of onreadstatechange function
+req.open("GET","log.txt",true);
+req.send();
+
+setTimeout(function(){
+loadXMLDoc();
+
+},1500); 
+} // end of loadXMLDoc()
+
+function loadXMLDoc2() {
+req2=new XMLHttpRequest();
+req2.onreadystatechange=function() {
+if (req2.readyState==4 && req2.status==200) {
+document.getElementById("div2").innerHTML=req2.responseText;
+}
+} // end of onreadstatechange function
+req2.open("GET","log2.txt",true);
+req2.send();
+
+setTimeout(function(){
+loadXMLDoc2();
+
+},1500); 
+} // end of loadXMLDoc()
+</script>
+ </head>
+ <body>
+ <p>
+ <p>Bieżąca temperatura:</p>
+    <div id="div1">Wczytywanie czujnika 1...</div>
+    <div id="div2">Wczytywanie czujnika 2...</div>
+   <script type="text/javascript">
+loadXMLDoc();
+loadXMLDoc2();
+</script>
+ 
+ 	<ul>
+ 	 <% read %>
+ 	      <% @places.each do |place| %>
+        <li>
+          <strong><%= place.temperature %></strong> C
+          <%= place.created_at %>
+          <a href="temperaturadestr?id=<%= place.id %>" style="font-size: small; color: blue;">Usuń</a>
+        </li>
+       
+      <% end %>
+   </ul>
+  <hr>
+
+
+
+
+<%= column_chart Place.group(:created_at).sum(:temperature), height: "500px" %>
+<br>
+<!-- <button onclick="myFunction()">Reload page</button> -->
+
+<script>
+function myFunction() {
+    location.reload();
+}
+</script>
+<!--
+<div id="div1">current value</div>
+
+<input type="button" id="button1" value="click me!" onclick="loadXMLDoc()"/>
+-->
+ </p>
+</body>
