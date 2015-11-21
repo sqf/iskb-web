@@ -9,8 +9,8 @@ get '/' do
   erb :index
 end
 
-post '/temperatura' do
-  @temperatura = (params[:temperature])
+post '/temperature' do
+  @temperature = (params[:temperature])
  
   Place.create(:temperature => @temperature, :created_at => Time.now)
   open("public/log.txt","w") do |f|
@@ -20,7 +20,7 @@ post '/temperatura' do
 
 get '/temperaturaget' do
   @temperature = (params[:temperature])
-#  Place.create params[:temperature]
+  Place.create params[:temperature]
   Place.create(:temperature => @temperature, :created_at => Time.now)
   open("public/log.txt","w") do |f|
     f.puts "#{Time.now} - #{request.ip} - #{@temperature}"
