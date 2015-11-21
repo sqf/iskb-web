@@ -2,15 +2,8 @@ require 'rubygems'
 require 'sinatra'
 require "sinatra/activerecord"
 require "chartkick"
+require_relative "activeRecord"
 #require 'groupdate'
-
-ActiveRecord::Base.establish_connection(
-  :adapter  => "mysql2",
-  :host     => "localhost",
-  :username => "termometr",
-  :password => "termohaslo!",
-  :database => "termometr"
-)
 
 get '/' do
   erb :index
