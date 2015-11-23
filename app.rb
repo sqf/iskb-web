@@ -12,11 +12,13 @@ end
 post '/sensor1' do
   @temperature = (params[:temperature])
   @humidity = (params[:humidity])
-  Place.create(:temperature => @temperature, :created_at => Time.now)
+  #Place.create(:temperature => @temperature, :created_at => Time.now)
   #Place.create(:humidity => @humidity, :created_at => Time.now)
   open("public/sensor1.txt","w") do |f|
-    f.puts "#{Time.now} - #{request.ip} - #{@temperature}"
-    f.puts "#{Time.now} - #{request.ip} - #{@humidity}"
+    f.puts "#{Time.now} - #{request.ip}\n"
+    cDegree = "\u2103"
+    #f.puts cDegree.force_encoding('utf-8')
+    f.puts "#{@temperature} #{cDegree.force_encoding('utf-8')} - #{@humidity} %"
   end
  end
 
