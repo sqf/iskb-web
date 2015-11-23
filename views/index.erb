@@ -13,7 +13,7 @@ if (req.readyState==4 && req.status==200) {
 document.getElementById("div1").innerHTML=req.responseText;
 }
 } // end of onreadstatechange function
-req.open("GET","temperature.txt",true);
+req.open("GET","sensor1.txt",true);
 req.send();
 
 setTimeout(function(){
@@ -42,11 +42,11 @@ loadXMLDoc2();
  <body>
  <p>
  <p>Czujnik nr 1:</p>
-    <div id="div1">Wczytywanie temperatury...</div>
-    <div id="div2">Wczytywanie wilgotności...</div>
+    <div id="div1">Wczytywanie...</div>
+    <!--<div id="div2">Wczytywanie wilgotności...</div>-->
    <script type="text/javascript">
 loadXMLDoc();
-loadXMLDoc2();
+//<!--loadXMLDoc2();-->
 </script>
  
  	<ul>

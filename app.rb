@@ -9,23 +9,19 @@ get '/' do
   erb :index
 end
 
-post '/temperature' do
+post '/sensor1' do
   @temperature = (params[:temperature])
- 
-  Place.create(:temperature => @temperature, :created_at => Time.now)
-  open("public/temperature.txt","w") do |f|
-    f.puts "#{Time.now} - #{request.ip} - #{@temperature}"
-  end
- end
-
- post '/humidity' do
   @humidity = (params[:humidity])
- 
-  Place.create(:humidity => @humidity, :created_at => Time.now)
-  open("public/humidity.txt","w") do |f|
+  Place.create(:temperature => @temperature, :created_at => Time.now)
+  #Place.create(:humidity => @humidity, :created_at => Time.now)
+  open("public/sensor1.txt","w") do |f|
+    f.puts "#{Time.now} - #{request.ip} - #{@temperature}"
     f.puts "#{Time.now} - #{request.ip} - #{@humidity}"
   end
  end
+
+
+
 
 get '/temperaturaget' do
   @temperature = (params[:temperature])
