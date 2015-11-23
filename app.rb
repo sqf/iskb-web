@@ -13,8 +13,17 @@ post '/temperature' do
   @temperature = (params[:temperature])
  
   Place.create(:temperature => @temperature, :created_at => Time.now)
-  open("public/log.txt","w") do |f|
+  open("public/temperature.txt","w") do |f|
     f.puts "#{Time.now} - #{request.ip} - #{@temperature}"
+  end
+ end
+
+ post '/humidity' do
+  @humidity = (params[:humidity])
+ 
+  Place.create(:humidity => @humidity, :created_at => Time.now)
+  open("public/humidity.txt","w") do |f|
+    f.puts "#{Time.now} - #{request.ip} - #{@humidity}"
   end
  end
 
@@ -39,6 +48,7 @@ class CreatePlaces < ActiveRecord::Migration
   def change
     create_table :places do |t|
       t.float :temperature
+      t.float :humidity
       t.string :created_at
     end
   end
