@@ -7,21 +7,20 @@
     <script src="chartkick.js"></script>
     <script type="text/javascript">
 function loadXMLDoc() {
-req=new XMLHttpRequest();
-req.onreadystatechange=function() {
-if (req.readyState==4 && req.status==200) {
-document.getElementById("dateAndIP").innerHTML=req.responseText.slice(0, 40);
-document.getElementById("temperature").innerHTML="Temperatura: " + req.responseText.slice(42, 50);
-document.getElementById("humidity").innerHTML="Wilgotność: " + req.responseText.slice(52);
-}
-} // end of onreadstatechange function
-req.open("GET","sensor1.txt",true);
-req.send();
+  req = new XMLHttpRequest();
+  req.onreadystatechange = function() {
+    if (req.readyState == 4 && req.status == 200) {
+      document.getElementById("dateAndIP").innerHTML = req.responseText.slice(0, 40);
+      document.getElementById("temperature").innerHTML = "Temperatura: " + req.responseText.slice(42, 50);
+      document.getElementById("humidity").innerHTML = "Wilgotność: " + req.responseText.slice(52);
+    }
+  } // end of onreadstatechange function
+  req.open("GET", "sensor1.txt", true);
+  req.send();
 
-setTimeout(function(){
-loadXMLDoc();
-
-},1500); 
+  setTimeout(function(){
+    loadXMLDoc();
+  }, 1500); 
 } // end of loadXMLDoc()
 
 function loadXMLDoc2() {
@@ -58,7 +57,7 @@ loadXMLDoc();
         <li>
           <strong><%= measurement.temperature %></strong> C
           <%= measurement.created_at %>
-          <a href="temperaturadestr?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
+          <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
         </li>
        
       <% end %>

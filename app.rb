@@ -28,26 +28,6 @@ post '/sensor1' do
   end
  end
 
-
-
-
-get '/temperaturaget' do
-  @temperature = (params[:temperature])
-  Place.create params[:temperature]
-  Place.create(:temperature => @temperature, :created_at => Time.now)
-  open("public/log.txt","w") do |f|
-    f.puts "#{Time.now} - #{request.ip} - #{@temperature}"
-  end
-  erb :ok
-end
-
-get '/temperatura2get' do
-  @temperature2 = (params[:temperature])
-  open("public/log2.txt","w") do |f|
-    f.puts "#{Time.now} - #{request.ip} - #{@temperature2}"
-  end
-end
-
 class Measurement < ActiveRecord::Base
 end
 
@@ -55,7 +35,7 @@ end
 class App < Sinatra::Application
 end
 
-get '/temperaturadestr' do
+get '/destroyMeasurement' do
   @value = Measurement.find(params[:id])
   @value.destroy
   #redirect "/"
