@@ -6,3 +6,4 @@ gem "mysql2"
 gem "rake"
 gem "chartkick"
 gem 'groupdate'
+gem 'pry'

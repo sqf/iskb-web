@@ -11,11 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123155649) do
+ActiveRecord::Schema.define(version: 20151128150259) do
 
-  create_table "places", force: true do |t|
+  create_table "measurements", force: true do |t|
     t.float  "temperature", limit: 24
     t.string "created_at"
+    t.float  "humidity",    limit: 24
+    t.string "place_name"
   end
 
 end
