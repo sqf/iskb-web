@@ -56,6 +56,7 @@ loadXMLDoc();
  	      <% @measurements.each do |measurement| %>
         <li>
           <strong><%= measurement.temperature %></strong> C
+          <strong><%= measurement.humidity %></strong> %
           <%= measurement.created_at %>
           <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
         </li>

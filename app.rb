@@ -16,8 +16,8 @@ end
 post '/sensor1' do
   @temperature = (params[:temperature])
   @humidity = (params[:humidity])
-  #Measurement.create(:temperature => @temperature, :created_at => Time.now)
-  #Measurement.create(:humidity => @humidity, :created_at => Time.now)
+  Measurement.create(:temperature => @temperature, :created_at => Time.now)
+  Measurement.create(:humidity => @humidity, :created_at => Time.now)
   open("public/sensor1.txt","w") do |f|
     f.puts "#{Time.now} - #{request.ip}\n"
     f.puts "\n"
