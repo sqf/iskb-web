@@ -22,6 +22,7 @@ post '/measurement' do
   open("public/" + @place_name + "-lastMeasurements.txt","w") do |f|
     f.puts "#{Time.now}"
     f.puts "#{request.ip}"
+    f.puts "#{@status}"
     cDegree = "\u2103"
     #f.puts cDegree.force_encoding('utf-8')
     f.puts "#{@temperature} #{cDegree.force_encoding('utf-8')}"
@@ -52,6 +53,4 @@ get '/destroyMeasurement' do
   @value.destroy
   #redirect "/"
 end
-  
-
-   
+ 

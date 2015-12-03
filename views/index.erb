@@ -14,8 +14,9 @@ function loadMeasurement() {
       var lines = req.responseText.split("\n");
       document.getElementById("date").innerHTML = lines[0];
       document.getElementById("ip").innerHTML = lines[1];
-      document.getElementById("temperature").innerHTML = "Temperatura: " + lines[2]
-      document.getElementById("humidity").innerHTML = "Wilgotność: " + lines[3]
+      document.getElementById("status").innerHTML = lines[2];
+      document.getElementById("temperature").innerHTML = "Temperatura: " + lines[3]
+      document.getElementById("humidity").innerHTML = "Wilgotność: " + lines[4]
     }
   } // end of onreadstatechange function
   req.open("POST", "room1-lastMeasurements.txt", true);
@@ -50,6 +51,7 @@ function loadMovement() {
     <!--<p>Czujniki temperatury i wilgotności nr 1:</p>-->
     <div id="date">Wczytywanie daty...</div>
     <div id="ip">Wczytywanie adresu IP...</div>
+    <div id="status">Wczytywanie statusu...</div>
     <div id="temperature">Wczytywanie temperatury...</div>
     <div id="humidity">Wczytywanie wilgotności...</div>
     <!--<div id="div2">Wczytywanie wilgotności...</div>-->
