@@ -1,4 +1,13 @@
-body
+#rooms
 {
-   font-size: large;
+	width: 994px;
+	height: 772px;
+
+  background-image: url("podkladw.png");
+  margin: 0 auto;
+}
+
+#room1
+{
+  position: relative; left: 50px; top: 125px;
 }

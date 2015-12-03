@@ -7,20 +7,20 @@
     <script src="//www.google.com/jsapi"></script>
     <script src="chartkick.js"></script>
     <script type="text/javascript">
-function loadXMLDoc() {
+function loadMeasurement() {
   req = new XMLHttpRequest();
   req.onreadystatechange = function() {
     if (req.readyState == 4 && req.status == 200) {
       document.getElementById("dateAndIP").innerHTML = req.responseText.slice(0, 40);
       document.getElementById("temperature").innerHTML = "Temperatura: " + req.responseText.slice(42, 50);
-      document.getElementById("humidity").innerHTML = "Wilgotność: " + req.responseText.slice(52);
+      document.getElementById("humidity").innerHTML = "Wilgotność: " + req.responseText.slice(53);
     }
   } // end of onreadstatechange function
-  req.open("GET", "sensor1.txt", true);
+  req.open("GET", "room1-lastMeasurements.txt", true);
   req.send();
 
   setTimeout(function(){
-    loadXMLDoc();
+    loadMeasurement();
   }, 1500); 
 } // end of loadXMLDoc()
 
@@ -28,39 +28,43 @@ function loadMovement() {
   req2 = new XMLHttpRequest();
   req2.onreadystatechange = function() {
     if (req.readyState == 4 && req.status == 200) {
-      document.getElementById("dateAndIP2").innerHTML = "Ostatni ruch o godzinie: " + req2.responseText.slice(0, 40);
-      document.getElementById("movement").innerHTML = "W miejscu: " + req2.responseText.slice(42);
+      document.getElementById("dateAndIP2").innerHTML = "Ostatni ruch: " + req2.responseText.slice(0, 19);
+      //document.getElementById("movement").innerHTML = "W miejscu: " + req2.responseText.slice(42);
     }
   } // end of onreadstatechange function
-  req2.open("GET", "movement1.txt", true);
+  req2.open("GET", "room1-lastMovement.txt", true);
   req2.send();
 
   setTimeout(function(){
-    loadXMLDoc();
+    loadMovement();
   }, 1500); 
-} // end of loadXMLDoc()
+} // end of loadMovement()
 
 </script>
  </head>
 <body>
-  <p>
-    <p>Czujniki temperatury i wilgotności nr 1:</p>
+  <div>
+    <div id="rooms">
+    <div id="room1">
+    <!--<p>Czujniki temperatury i wilgotności nr 1:</p>-->
     <div id="dateAndIP">Wczytywanie...</div>
     <div id="temperature">Wczytywanie temperatury...</div>
     <div id="humidity">Wczytywanie wilgotności...</div>
     <!--<div id="div2">Wczytywanie wilgotności...</div>-->
     <script type="text/javascript">
-      loadXMLDoc();
+      loadMeasurement();
 //<!--loadXMLDoc2();-->
     </script>
  
-    <p>Czujnik ruchu nr 1:</p>
+    <!--<p>Czujnik ruchu nr 1:</p>-->
     <div id="dateAndIP2">Wczytywanie...</div>
     <div id="movement">Wczytywanie ostatnich danych o ruchu...</div> 
     <script type="text/javascript">
       loadMovement();
 //<!--loadXMLDoc2();-->
     </script>
+  </div>
+  </div>
  	<ul>
  	      <% @measurements.each do |measurement| %>
         <li>
@@ -97,5 +101,5 @@ function myFunction() {
 
 <input type="button" id="button1" value="click me!" onclick="loadXMLDoc()"/>
 -->
- </p>
+ </div>
 </body>
