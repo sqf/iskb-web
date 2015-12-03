@@ -16,7 +16,9 @@ end
 post '/sensor1' do
   @temperature = (params[:temperature])
   @humidity = (params[:humidity])
-  Measurement.create(:temperature => @temperature, :humidity => @humidity, :created_at => Time.now)
+  @status = (params[:status])
+  @place_name = (params[:place_name])
+  Measurement.create(:temperature => @temperature, :humidity => @humidity, :created_at => Time.now, :status => @status, :place_name => @place_name)
   open("public/sensor1.txt","w") do |f|
     f.puts "#{Time.now} - #{request.ip}\n"
     f.puts "\n"
@@ -25,9 +27,22 @@ post '/sensor1' do
     #f.puts cDegree.force_encoding('utf-8')
     f.puts "#{@temperature} #{cDegree.force_encoding('utf-8')} - #{@humidity} %"
   end
- end
+end
+
+post '/movement1' do
+  @place_name = (params[:place_name])
+  Movement.create(:created_at => Time.now, :place_name => @place_name)
+  open("public/movement1.txt","w") do |f|
+    f.puts "#{Time.now} - #{request.ip}\n"
+    f.puts "\n"
+    f.puts "#{@place_name}"
+  end
+end
 
 class Measurement < ActiveRecord::Base
+end
+
+class Movement < ActiveRecord::Base
 end
 
 

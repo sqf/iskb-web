@@ -23,40 +23,50 @@ function loadXMLDoc() {
   }, 1500); 
 } // end of loadXMLDoc()
 
-function loadXMLDoc2() {
-req2=new XMLHttpRequest();
-req2.onreadystatechange=function() {
-if (req2.readyState==4 && req2.status==200) {
-document.getElementById("div2").innerHTML=req2.responseText;
-}
-} // end of onreadstatechange function
-req2.open("GET","humidity.txt",true);
-req2.send();
+function loadMovement() {
+  req2 = new XMLHttpRequest();
+  req2.onreadystatechange = function() {
+    if (req.readyState == 4 && req.status == 200) {
+      document.getElementById("dateAndIP2").innerHTML = "Ostatni ruch o godzinie: " + req2.responseText.slice(0, 40);
+      document.getElementById("movement").innerHTML = "W miejscu: " + req2.responseText.slice(42);
+    }
+  } // end of onreadstatechange function
+  req2.open("GET", "movement1.txt", true);
+  req2.send();
 
-setTimeout(function(){
-loadXMLDoc2();
-
-},1500); 
+  setTimeout(function(){
+    loadXMLDoc();
+  }, 1500); 
 } // end of loadXMLDoc()
+
 </script>
  </head>
- <body>
- <p>
- <p>Czujnik nr 1:</p>
+<body>
+  <p>
+    <p>Czujniki temperatury i wilgotności nr 1:</p>
     <div id="dateAndIP">Wczytywanie...</div>
     <div id="temperature">Wczytywanie temperatury...</div>
     <div id="humidity">Wczytywanie wilgotności...</div>
     <!--<div id="div2">Wczytywanie wilgotności...</div>-->
-   <script type="text/javascript">
-loadXMLDoc();
+    <script type="text/javascript">
+      loadXMLDoc();
 //<!--loadXMLDoc2();-->
-</script>
+    </script>
  
+    <p>Czujnik ruchu nr 1:</p>
+    <div id="dateAndIP2">Wczytywanie...</div>
+    <div id="movement">Wczytywanie ostatnich danych o ruchu...</div> 
+    <script type="text/javascript">
+      loadMovement();
+//<!--loadXMLDoc2();-->
+    </script>
  	<ul>
  	      <% @measurements.each do |measurement| %>
         <li>
           <strong><%= measurement.temperature %></strong> C
           <strong><%= measurement.humidity %></strong> %
+          <strong><%= measurement.place_name %></strong>
+          <strong><%= measurement.status %></strong>
           <%= measurement.created_at %>
           <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
         </li>
