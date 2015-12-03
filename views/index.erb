@@ -11,12 +11,14 @@ function loadMeasurement() {
   req = new XMLHttpRequest();
   req.onreadystatechange = function() {
     if (req.readyState == 4 && req.status == 200) {
-      document.getElementById("dateAndIP").innerHTML = req.responseText.slice(0, 40);
-      document.getElementById("temperature").innerHTML = "Temperatura: " + req.responseText.slice(42, 50);
-      document.getElementById("humidity").innerHTML = "Wilgotność: " + req.responseText.slice(53);
+      var lines = req.responseText.split("\n");
+      document.getElementById("date").innerHTML = lines[0];
+      document.getElementById("ip").innerHTML = lines[1];
+      document.getElementById("temperature").innerHTML = "Temperatura: " + lines[2]
+      document.getElementById("humidity").innerHTML = "Wilgotność: " + lines[3]
     }
   } // end of onreadstatechange function
-  req.open("GET", "room1-lastMeasurements.txt", true);
+  req.open("POST", "room1-lastMeasurements.txt", true);
   req.send();
 
   setTimeout(function(){
@@ -28,11 +30,10 @@ function loadMovement() {
   req2 = new XMLHttpRequest();
   req2.onreadystatechange = function() {
     if (req.readyState == 4 && req.status == 200) {
-      document.getElementById("dateAndIP2").innerHTML = "Ostatni ruch: " + req2.responseText.slice(0, 19);
-      //document.getElementById("movement").innerHTML = "W miejscu: " + req2.responseText.slice(42);
+      document.getElementById("dateOfMovement").innerHTML = "Ostatni ruch: " + req2.responseText;
     }
   } // end of onreadstatechange function
-  req2.open("GET", "room1-lastMovement.txt", true);
+  req2.open("POST", "room1-lastMovement.txt", true);
   req2.send();
 
   setTimeout(function(){
@@ -47,7 +48,8 @@ function loadMovement() {
     <div id="rooms">
     <div id="room1">
     <!--<p>Czujniki temperatury i wilgotności nr 1:</p>-->
-    <div id="dateAndIP">Wczytywanie...</div>
+    <div id="date">Wczytywanie daty...</div>
+    <div id="ip">Wczytywanie adresu IP...</div>
     <div id="temperature">Wczytywanie temperatury...</div>
     <div id="humidity">Wczytywanie wilgotności...</div>
     <!--<div id="div2">Wczytywanie wilgotności...</div>-->
@@ -57,8 +59,7 @@ function loadMovement() {
     </script>
  
     <!--<p>Czujnik ruchu nr 1:</p>-->
-    <div id="dateAndIP2">Wczytywanie...</div>
-    <div id="movement">Wczytywanie ostatnich danych o ruchu...</div> 
+    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
     <script type="text/javascript">
       loadMovement();
 //<!--loadXMLDoc2();-->

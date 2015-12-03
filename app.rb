@@ -20,7 +20,8 @@ post '/measurement' do
   @place_name = (params[:place_name])
   Measurement.create(:temperature => @temperature, :humidity => @humidity, :created_at => Time.now, :status => @status, :place_name => @place_name)
   open("public/" + @place_name + "-lastMeasurements.txt","w") do |f|
-    f.puts "#{Time.now} - #{request.ip}"
+    f.puts "#{Time.now}"
+    f.puts "#{request.ip}"
     cDegree = "\u2103"
     #f.puts cDegree.force_encoding('utf-8')
     f.puts "#{@temperature} #{cDegree.force_encoding('utf-8')}"
@@ -32,8 +33,7 @@ post '/movement' do
   @place_name = (params[:place_name])
   Movement.create(:created_at => Time.now, :place_name => @place_name)
   open("public/" + @place_name + "-lastMovement.txt","w") do |f|
-    f.puts "#{Time.now}#{request.ip}"
-    f.puts "#{request.ip}"
+    f.puts "#{Time.now}"
   end
 end
 
