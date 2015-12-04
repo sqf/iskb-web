@@ -13,14 +13,19 @@ get '/' do
   erb :index
 end
 counter = 0
+decimationFactor = 10
 post '/measurement' do
   counter += 1
   @temperature = (params[:temperature])
   @humidity = (params[:humidity])
   @status = (params[:status])
   @place_name = (params[:place_name])
-  if (counter == 10)
-    Measurement.create(:temperature => @temperature, :humidity => @humidity, :created_at => Time.now, :status => @status, :place_name => @place_name)
+  if (counter == decimationFactor)
+    Measurement.create(:temperature => @temperature, 
+      :humidity => @humidity,
+      :created_at => Time.now,
+      :status => @status,
+      :place_name => @place_name)
     counter = 0;
   end
   open("public/" + @place_name + "-lastMeasurements.txt","w") do |f|
