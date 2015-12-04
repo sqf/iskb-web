@@ -12,32 +12,32 @@ function loadLastMeasurements(placeName) {
   setInterval(function () {
     req = new XMLHttpRequest();
     req.onreadystatechange = function () {
-      if (req.readyState == 4 && req.status == 200) {
+      if (req.readyState === 4 && req.status === 200) {
         var lines = req.responseText.split("\n");
         $("#" + placeName + " > #date")[0].innerHTML = lines[0];
         $("#" + placeName + " > #ip")[0].innerHTML = lines[1];
         $("#" + placeName + " > #status")[0].innerHTML = lines[2];
-        $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[3]
-        $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[4]
+        $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[3];
+        $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[4];
       }
     }
     req.open("POST", placeName + "-lastMeasurements.txt", true);
     req.send();
-  }, 1500);
+  }, 3000);
 }
 
 function loadLastMovement(placeName) {
   setInterval(function () {
     req2 = new XMLHttpRequest();
     req2.onreadystatechange = function () {
-      if (req.readyState == 4 && req.status == 200) {
-        document.getElementById("dateOfMovement").innerHTML = "Ostatni ruch: " + req2.responseText;
+      if (req.readyState === 4 && req.status === 200) {
+        $("#" + placeName + " > #dateOfMovement")[0].innerHTML = "Ostatni ruch: " + req2.responseText;
       }
-    } // end of onreadstatechange function
+    }
     req2.open("POST", placeName + "-lastMovement.txt", true);
     req2.send();
-  }, 1500);
-} // end of loadMovement()
+  }, 3000);
+}
 
 </script>
  </head>
