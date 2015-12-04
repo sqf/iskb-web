@@ -42,64 +42,62 @@ function loadLastMovement(placeName) {
 </script>
  </head>
 <body>
-  <div>
-    <div id="rooms">
+<div>
+  <div id="rooms">
     <div id="room1">
-    <!--<p>Czujniki temperatury i wilgotności nr 1:</p>-->
-    <div id="date">Wczytywanie daty...</div>
-    <div id="ip">Wczytywanie adresu IP...</div>
-    <div id="status">Wczytywanie statusu...</div>
-    <div id="temperature">Wczytywanie temperatury...</div>
-    <div id="humidity">Wczytywanie wilgotności...</div>
-    <!--<div id="div2">Wczytywanie wilgotności...</div>-->
-    <script type="text/javascript">
-      loadLastMeasurements("room1");
-//<!--loadXMLDoc2();-->
-    </script>
- 
-    <!--<p>Czujnik ruchu nr 1:</p>-->
-    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
-    <script type="text/javascript">
-      loadLastMovement("room1");
-//<!--loadXMLDoc2();-->
-    </script>
+      <!--<p>Czujniki temperatury i wilgotności nr 1:</p>-->
+      <div id="date">Wczytywanie daty...</div>
+      <div id="ip">Wczytywanie adresu IP...</div>
+      <div id="status">Wczytywanie statusu...</div>
+      <div id="temperature">Wczytywanie temperatury...</div>
+      <div id="humidity">Wczytywanie wilgotności...</div>
+      <!--<div id="div2">Wczytywanie wilgotności...</div>-->
+      <script type="text/javascript">
+        loadLastMeasurements("room1");
+        // <!--loadXMLDoc2();-->
+      </script>
+
+      <!--<p>Czujnik ruchu nr 1:</p>-->
+      <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+      <script type="text/javascript">
+        loadLastMovement("room1");
+        // <!--loadXMLDoc2();-->
+      </script>
+    </div>
   </div>
-  </div>
- 	<ul>
- 	      <% @measurements.each do |measurement| %>
-        <li>
-          <strong><%= measurement.temperature %></strong> C
-          <strong><%= measurement.humidity %></strong> %
-          <strong><%= measurement.place_name %></strong>
-          <strong><%= measurement.status %></strong>
-          <%= measurement.created_at %>
-          <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
-        </li>
-       
-      <% end %>
-   </ul>
+  <ul>
+    <% @measurements.each do |measurement| %>
+    <li>
+      <strong><%= measurement.temperature %></strong> C
+      <strong><%= measurement.humidity %></strong> %
+      <strong><%= measurement.place_name %></strong>
+      <strong><%= measurement.status %></strong>
+      <%= measurement.created_at %>
+      <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
+    </li>
+
+    <% end %>
+  </ul>
   <hr>
 
 
-
-
-<%= column_chart @data_for_chart, height: "500px" %>
-<%= column_chart @average_by_day, height: "500px" %>
+  <%= column_chart @data_for_chart, height: "500px" %>
+  <%= column_chart @average_by_day, height: "500px" %>
 <pre>
 <%= @average_by_day.to_s %>
 </pre>
-<br>
-<!-- <button onclick="myFunction()">Reload page</button> -->
+  <br>
+  <!-- <button onclick="myFunction()">Reload page</button> -->
 
-<script>
-function myFunction() {
-    location.reload();
-}
-</script>
-<!--
-<div id="div1">current value</div>
-
-<input type="button" id="button1" value="click me!" onclick="loadXMLDoc()"/>
--->
- </div>
+  <script>
+    function myFunction() {
+      location.reload();
+    }
+  </script>
+  <!--
+  <div id="div1">current value</div>
+  
+  <input type="button" id="button1" value="click me!" onclick="loadXMLDoc()"/>
+  -->
+</div>
 </body>
