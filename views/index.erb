@@ -14,11 +14,11 @@ function loadLastMeasurements(placeName) {
     req.onreadystatechange = function () {
       if (req.readyState == 4 && req.status == 200) {
         var lines = req.responseText.split("\n");
-        document.getElementById("date").innerHTML = lines[0];
-        document.getElementById("ip").innerHTML = lines[1];
-        document.getElementById("status").innerHTML = lines[2];
-        document.getElementById("temperature").innerHTML = "Temperatura: " + lines[3]
-        document.getElementById("humidity").innerHTML = "Wilgotność: " + lines[4]
+        $("#" + placeName + " > #date")[0].innerHTML = lines[0];
+        $("#" + placeName + " > #ip")[0].innerHTML = lines[1];
+        $("#" + placeName + " > #status")[0].innerHTML = lines[2];
+        $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[3]
+        $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[4]
       }
     }
     req.open("POST", placeName + "-lastMeasurements.txt", true);
