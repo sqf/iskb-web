@@ -12,19 +12,22 @@ get '/' do
   @average_by_date = Measurement.group_by_day(:created_at).average(:temperature).to_a #.collect { |a| [a[0].to_s,a[1].to_f] }
   erb :index
 end
-
+counter = 0
 post '/measurement' do
+  counter += 1
   @temperature = (params[:temperature])
   @humidity = (params[:humidity])
   @status = (params[:status])
   @place_name = (params[:place_name])
-  Measurement.create(:temperature => @temperature, :humidity => @humidity, :created_at => Time.now, :status => @status, :place_name => @place_name)
+  if (counter == 10)
+    Measurement.create(:temperature => @temperature, :humidity => @humidity, :created_at => Time.now, :status => @status, :place_name => @place_name)
+    counter = 0;
+  end
   open("public/" + @place_name + "-lastMeasurements.txt","w") do |f|
     f.puts "#{Time.now}"
     f.puts "#{request.ip}"
     f.puts "#{@status}"
     cDegree = "\u2103"
-    #f.puts cDegree.force_encoding('utf-8')
     f.puts "#{@temperature} #{cDegree.force_encoding('utf-8')}"
     f.puts "#{@humidity} %"
   end

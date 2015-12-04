@@ -1,103 +1,127 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-    <title>Temperatura</title>
-    <meta charset="utf-8">
-    <link rel="Stylesheet" type="text/css" href="style.css" />
-    <script src="//www.google.com/jsapi"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="chartkick.js"></script>
-    <script type="text/javascript">
-function loadLastMeasurements(placeName) {
-  setInterval(function () {
-    req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-      if (req.readyState === 4 && req.status === 200) {
-        var lines = req.responseText.split("\n");
-        $("#" + placeName + " > #date")[0].innerHTML = lines[0];
-        $("#" + placeName + " > #ip")[0].innerHTML = lines[1];
-        $("#" + placeName + " > #status")[0].innerHTML = lines[2];
-        $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[3];
-        $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[4];
-      }
+  <title>Temperatura</title>
+  <meta charset="utf-8">
+  <link rel="Stylesheet" type="text/css" href="style.css"/>
+  <script src="//www.google.com/jsapi"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="chartkick.js"></script>
+  <script type="text/javascript">
+    function loadLastMeasurements(placeName) {
+      setInterval(function () {
+        req = new XMLHttpRequest();
+        req.onreadystatechange = function () {
+          if (req.readyState === 4 && req.status === 200) {
+            console.log(placeName);
+            var lines = req.responseText.split("\n");
+            $("#" + placeName + " > #date")[0].innerHTML = lines[0];
+            $("#" + placeName + " > #ip")[0].innerHTML = lines[1];
+            $("#" + placeName + " > #status")[0].innerHTML = lines[2];
+            $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[3];
+            $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[4];
+          }
+        }
+        req.open("POST", placeName + "-lastMeasurements.txt", true);
+        req.send();
+      }, 1500);
     }
-    req.open("POST", placeName + "-lastMeasurements.txt", true);
-    req.send();
-  }, 3000);
-}
 
-function loadLastMovement(placeName) {
-  setInterval(function () {
-    req2 = new XMLHttpRequest();
-    req2.onreadystatechange = function () {
-      if (req.readyState === 4 && req.status === 200) {
-        $("#" + placeName + " > #dateOfMovement")[0].innerHTML = "Ostatni ruch: " + req2.responseText;
-      }
+    function loadLastMovement(placeName) {
+      setInterval(function () {
+        req2 = new XMLHttpRequest();
+        req2.onreadystatechange = function () {
+          if (req2.readyState === 4 && req2.status === 200) {
+            $("#" + placeName + " > #dateOfMovement")[0].innerHTML = "Ostatni ruch: " + req2.responseText;
+          }
+        }
+        req2.open("POST", placeName + "-lastMovement.txt", true);
+        req2.send();
+      }, 1500);
     }
-    req2.open("POST", placeName + "-lastMovement.txt", true);
-    req2.send();
-  }, 3000);
-}
 
-</script>
- </head>
+  </script>
+</head>
 <body>
-<div>
-  <div id="rooms">
-    <div id="room1">
-      <!--<p>Czujniki temperatury i wilgotności nr 1:</p>-->
-      <div id="date">Wczytywanie daty...</div>
-      <div id="ip">Wczytywanie adresu IP...</div>
-      <div id="status">Wczytywanie statusu...</div>
-      <div id="temperature">Wczytywanie temperatury...</div>
-      <div id="humidity">Wczytywanie wilgotności...</div>
-      <!--<div id="div2">Wczytywanie wilgotności...</div>-->
-      <script type="text/javascript">
-        loadLastMeasurements("room1");
-        // <!--loadXMLDoc2();-->
-      </script>
+<div id="rooms">
+  <div id="room1">
+    <div id="date">Wczytywanie daty...</div>
+    <div id="ip">Wczytywanie adresu IP...</div>
+    <div id="status">Wczytywanie statusu...</div>
+    <div id="temperature">Wczytywanie temperatury...</div>
+    <div id="humidity">Wczytywanie wilgotności...</div>
+    <script type="text/javascript">
+      loadLastMeasurements("room1");
+    </script>
 
-      <!--<p>Czujnik ruchu nr 1:</p>-->
-      <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
-      <script type="text/javascript">
+    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <script type="text/javascript">
+      setTimeout(function () {
         loadLastMovement("room1");
-        // <!--loadXMLDoc2();-->
-      </script>
-    </div>
+      }, 200);
+    </script>
   </div>
-  <ul>
-    <% @measurements.each do |measurement| %>
-    <li>
-      <strong><%= measurement.temperature %></strong> C
-      <strong><%= measurement.humidity %></strong> %
-      <strong><%= measurement.place_name %></strong>
-      <strong><%= measurement.status %></strong>
-      <%= measurement.created_at %>
-      <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
-    </li>
 
-    <% end %>
-  </ul>
-  <hr>
+  <div id="room2">
+    <div id="date">Wczytywanie daty...</div>
+    <div id="ip">Wczytywanie adresu IP...</div>
+    <div id="status">Wczytywanie statusu...</div>
+    <div id="temperature">Wczytywanie temperatury...</div>
+    <div id="humidity">Wczytywanie wilgotności...</div>
+    <script type="text/javascript">
+      setTimeout(function () {
+        loadLastMeasurements("room2");
+      }, 400);
+    </script>
+
+    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <script type="text/javascript">
+      setTimeout(function () {
+        loadLastMovement("room2");
+      }, 600);
+    </script>
+  </div>
+
+  <div id="room3">
+    <div id="date">Wczytywanie daty...</div>
+    <div id="ip">Wczytywanie adresu IP...</div>
+    <div id="status">Wczytywanie statusu...</div>
+    <div id="temperature">Wczytywanie temperatury...</div>
+    <div id="humidity">Wczytywanie wilgotności...</div>
+    <script type="text/javascript">
+      setTimeout(function () {
+        loadLastMeasurements("room3");
+      }, 800);
+    </script>
+
+    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <script type="text/javascript">
+      setTimeout(function () {
+        loadLastMovement("room3");
+      }, 1000);
+    </script>
+  </div>
+</div>
+<ul>
+  <% @measurements.each do |measurement| %>
+  <li>
+    <strong><%= measurement.temperature %></strong> C
+    <strong><%= measurement.humidity %></strong> %
+    <strong><%= measurement.place_name %></strong>
+    <strong><%= measurement.status %></strong>
+    <%= measurement.created_at %>
+    <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
+  </li>
+
+  <% end %>
+</ul>
+<hr>
 
 
-  <%= column_chart @data_for_chart, height: "500px" %>
-  <%= column_chart @average_by_day, height: "500px" %>
+<%= column_chart @data_for_chart, height: "500px" %>
+<%= column_chart @average_by_day, height: "500px" %>
 <pre>
 <%= @average_by_day.to_s %>
 </pre>
-  <br>
-  <!-- <button onclick="myFunction()">Reload page</button> -->
-
-  <script>
-    function myFunction() {
-      location.reload();
-    }
-  </script>
-  <!--
-  <div id="div1">current value</div>
-  
-  <input type="button" id="button1" value="click me!" onclick="loadXMLDoc()"/>
-  -->
-</div>
 </body>
+</html>

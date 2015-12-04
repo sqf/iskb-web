@@ -11,3 +11,14 @@
 {
   position: relative; left: 50px; top: 125px;
 }
+
+#room2
+{
+  position: relative; left: 550px; top: 175px;
+  width: 350px;
+}
+
+#room3
+{
+  position: relative; left: 50px; top: 225px;
+}
