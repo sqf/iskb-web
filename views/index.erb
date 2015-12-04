@@ -5,41 +5,38 @@
     <meta charset="utf-8">
     <link rel="Stylesheet" type="text/css" href="style.css" />
     <script src="//www.google.com/jsapi"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="chartkick.js"></script>
     <script type="text/javascript">
-function loadMeasurement() {
-  req = new XMLHttpRequest();
-  req.onreadystatechange = function() {
-    if (req.readyState == 4 && req.status == 200) {
-      var lines = req.responseText.split("\n");
-      document.getElementById("date").innerHTML = lines[0];
-      document.getElementById("ip").innerHTML = lines[1];
-      document.getElementById("status").innerHTML = lines[2];
-      document.getElementById("temperature").innerHTML = "Temperatura: " + lines[3]
-      document.getElementById("humidity").innerHTML = "Wilgotność: " + lines[4]
+function loadLastMeasurements(placeName) {
+  setInterval(function () {
+    req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+      if (req.readyState == 4 && req.status == 200) {
+        var lines = req.responseText.split("\n");
+        document.getElementById("date").innerHTML = lines[0];
+        document.getElementById("ip").innerHTML = lines[1];
+        document.getElementById("status").innerHTML = lines[2];
+        document.getElementById("temperature").innerHTML = "Temperatura: " + lines[3]
+        document.getElementById("humidity").innerHTML = "Wilgotność: " + lines[4]
+      }
     }
-  } // end of onreadstatechange function
-  req.open("POST", "room1-lastMeasurements.txt", true);
-  req.send();
+    req.open("POST", placeName + "-lastMeasurements.txt", true);
+    req.send();
+  }, 1500);
+}
 
-  setTimeout(function(){
-    loadMeasurement();
-  }, 1500); 
-} // end of loadXMLDoc()
-
-function loadMovement() {
-  req2 = new XMLHttpRequest();
-  req2.onreadystatechange = function() {
-    if (req.readyState == 4 && req.status == 200) {
-      document.getElementById("dateOfMovement").innerHTML = "Ostatni ruch: " + req2.responseText;
-    }
-  } // end of onreadstatechange function
-  req2.open("POST", "room1-lastMovement.txt", true);
-  req2.send();
-
-  setTimeout(function(){
-    loadMovement();
-  }, 1500); 
+function loadLastMovement(placeName) {
+  setInterval(function () {
+    req2 = new XMLHttpRequest();
+    req2.onreadystatechange = function () {
+      if (req.readyState == 4 && req.status == 200) {
+        document.getElementById("dateOfMovement").innerHTML = "Ostatni ruch: " + req2.responseText;
+      }
+    } // end of onreadstatechange function
+    req2.open("POST", placeName + "-lastMovement.txt", true);
+    req2.send();
+  }, 1500);
 } // end of loadMovement()
 
 </script>
@@ -56,14 +53,14 @@ function loadMovement() {
     <div id="humidity">Wczytywanie wilgotności...</div>
     <!--<div id="div2">Wczytywanie wilgotności...</div>-->
     <script type="text/javascript">
-      loadMeasurement();
+      loadLastMeasurements("room1");
 //<!--loadXMLDoc2();-->
     </script>
  
     <!--<p>Czujnik ruchu nr 1:</p>-->
     <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
     <script type="text/javascript">
-      loadMovement();
+      loadLastMovement("room1");
 //<!--loadXMLDoc2();-->
     </script>
   </div>
