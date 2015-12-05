@@ -15,11 +15,11 @@
           if (req.readyState === 4 && req.status === 200) {
             console.log(placeName);
             var lines = req.responseText.split("\n");
-            $("#" + placeName + " > #date")[0].innerHTML = lines[0];
-            $("#" + placeName + " > #ip")[0].innerHTML = lines[1];
-            $("#" + placeName + " > #status")[0].innerHTML = lines[2];
-            $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[3];
-            $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[4];
+            $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[0];
+            $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[1];
+            $("#" + placeName + " > #status")[0].innerHTML = "Status czujnika: " + lines[2];
+            $("#" + placeName + " > #date")[0].innerHTML = "Odebrano: " + lines[3];
+            $("#" + placeName + " > #ip")[0].innerHTML = "Z adresu IP: " + lines[4];
           }
         }
         req.open("POST", placeName + "-lastMeasurements.txt", true);
@@ -45,16 +45,15 @@
 <body>
 <div id="rooms">
   <div id="room1">
-    <div id="date">Wczytywanie daty...</div>
-    <div id="ip">Wczytywanie adresu IP...</div>
-    <div id="status">Wczytywanie statusu...</div>
     <div id="temperature">Wczytywanie temperatury...</div>
     <div id="humidity">Wczytywanie wilgotności...</div>
+    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <div id="status">Wczytywanie statusu...</div>
+    <div id="date">Wczytywanie daty...</div>
+    <div id="ip">Wczytywanie adresu IP...</div>
     <script type="text/javascript">
       loadLastMeasurements("room1");
-    </script>
-
-    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    </script>    
     <script type="text/javascript">
       setTimeout(function () {
         loadLastMovement("room1");
@@ -63,18 +62,17 @@
   </div>
 
   <div id="room2">
-    <div id="date">Wczytywanie daty...</div>
-    <div id="ip">Wczytywanie adresu IP...</div>
-    <div id="status">Wczytywanie statusu...</div>
     <div id="temperature">Wczytywanie temperatury...</div>
     <div id="humidity">Wczytywanie wilgotności...</div>
+    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <div id="status">Wczytywanie statusu...</div>
+    <div id="date">Wczytywanie daty...</div>
+    <div id="ip">Wczytywanie adresu IP...</div>
     <script type="text/javascript">
       setTimeout(function () {
         loadLastMeasurements("room2");
       }, 400);
-    </script>
-
-    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    </script>    
     <script type="text/javascript">
       setTimeout(function () {
         loadLastMovement("room2");
@@ -83,18 +81,17 @@
   </div>
 
   <div id="room3">
-    <div id="date">Wczytywanie daty...</div>
-    <div id="ip">Wczytywanie adresu IP...</div>
-    <div id="status">Wczytywanie statusu...</div>
     <div id="temperature">Wczytywanie temperatury...</div>
     <div id="humidity">Wczytywanie wilgotności...</div>
+    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <div id="status">Wczytywanie statusu...</div>
+    <div id="date">Wczytywanie daty...</div>
+    <div id="ip">Wczytywanie adresu IP...</div>
     <script type="text/javascript">
       setTimeout(function () {
         loadLastMeasurements("room3");
       }, 800);
     </script>
-
-    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
     <script type="text/javascript">
       setTimeout(function () {
         loadLastMovement("room3");
