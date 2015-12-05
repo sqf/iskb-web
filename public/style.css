@@ -9,16 +9,27 @@
 
 #room1
 {
-  position: relative; left: 50px; top: 125px;
+  position: relative; left: 100px; top: 135px;
 }
 
 #room2
 {
-  position: relative; left: 550px; top: 175px;
+  position: relative; left: 580px; top: 200px;
   width: 350px;
 }
 
 #room3
 {
-  position: relative; left: 50px; top: 225px;
+  position: relative; left: 100px; top: 300px;
+}
+
+.date {
+	font-size: small;
+}
+.ip {
+	font-size: small;
+}
+
+.status {
+	font-size: small;
 }

@@ -15,11 +15,11 @@
           if (req.readyState === 4 && req.status === 200) {
             console.log(placeName);
             var lines = req.responseText.split("\n");
-            $("#" + placeName + " > #temperature")[0].innerHTML = "Temperatura: " + lines[0];
-            $("#" + placeName + " > #humidity")[0].innerHTML = "Wilgotność: " + lines[1];
-            $("#" + placeName + " > #status")[0].innerHTML = "Status czujnika: " + lines[2];
-            $("#" + placeName + " > #date")[0].innerHTML = "Odebrano: " + lines[3];
-            $("#" + placeName + " > #ip")[0].innerHTML = "Z adresu IP: " + lines[4];
+            $("#" + placeName + " > .temperature")[0].innerHTML = "Temperatura: " + lines[0];
+            $("#" + placeName + " > .humidity")[0].innerHTML = "Wilgotność: " + lines[1];
+            $("#" + placeName + " > .status")[0].innerHTML = "Status czujnika: " + lines[2];
+            $("#" + placeName + " > .date")[0].innerHTML = "Odebrano: " + lines[3];
+            $("#" + placeName + " > .ip")[0].innerHTML = "Z adresu IP: " + lines[4];
           }
         }
         req.open("POST", placeName + "-lastMeasurements.txt", true);
@@ -32,7 +32,7 @@
         var req = new XMLHttpRequest();
         req.onreadystatechange = function () {
           if (req.readyState === 4 && req.status === 200) {
-            $("#" + placeName + " > #dateOfMovement")[0].innerHTML = "Ostatni ruch: " + req.responseText;
+            $("#" + placeName + " > .dateOfMovement")[0].innerHTML = "Ostatni ruch: " + req.responseText;
           }
         }
         req.open("POST", placeName + "-lastMovement.txt", true);
@@ -45,12 +45,12 @@
 <body>
 <div id="rooms">
   <div id="room1">
-    <div id="temperature">Wczytywanie temperatury...</div>
-    <div id="humidity">Wczytywanie wilgotności...</div>
-    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
-    <div id="status">Wczytywanie statusu...</div>
-    <div id="date">Wczytywanie daty...</div>
-    <div id="ip">Wczytywanie adresu IP...</div>
+    <div class="temperature">Wczytywanie temperatury...</div>
+    <div class="humidity">Wczytywanie wilgotności...</div>
+    <div class="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <div class="status">Wczytywanie statusu...</div>
+    <div class="date">Wczytywanie daty...</div>
+    <div class="ip">Wczytywanie adresu IP...</div>
     <script type="text/javascript">
       loadLastMeasurements("room1");
     </script>    
@@ -62,12 +62,12 @@
   </div>
 
   <div id="room2">
-    <div id="temperature">Wczytywanie temperatury...</div>
-    <div id="humidity">Wczytywanie wilgotności...</div>
-    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
-    <div id="status">Wczytywanie statusu...</div>
-    <div id="date">Wczytywanie daty...</div>
-    <div id="ip">Wczytywanie adresu IP...</div>
+    <div class="temperature">Wczytywanie temperatury...</div>
+    <div class="humidity">Wczytywanie wilgotności...</div>
+    <div class="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <div class="status">Wczytywanie statusu...</div>
+    <div class="date">Wczytywanie daty...</div>
+    <div class="ip">Wczytywanie adresu IP...</div>
     <script type="text/javascript">
       setTimeout(function () {
         loadLastMeasurements("room2");
@@ -81,12 +81,12 @@
   </div>
 
   <div id="room3">
-    <div id="temperature">Wczytywanie temperatury...</div>
-    <div id="humidity">Wczytywanie wilgotności...</div>
-    <div id="dateOfMovement">Wczytywanie danych o ruchu...</div>
-    <div id="status">Wczytywanie statusu...</div>
-    <div id="date">Wczytywanie daty...</div>
-    <div id="ip">Wczytywanie adresu IP...</div>
+    <div class="temperature">Wczytywanie temperatury...</div>
+    <div class="humidity">Wczytywanie wilgotności...</div>
+    <div class="dateOfMovement">Wczytywanie danych o ruchu...</div>
+    <div class="status">Wczytywanie statusu...</div>
+    <div class="date">Wczytywanie daty...</div>
+    <div class="ip">Wczytywanie adresu IP...</div>
     <script type="text/javascript">
       setTimeout(function () {
         loadLastMeasurements("room3");
