@@ -6,14 +6,12 @@
   <link rel="Stylesheet" type="text/css" href="style.css"/>
   <script src="//www.google.com/jsapi"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="chartkick.js"></script>
-  <script type="text/javascript">
+  <script>
     function loadLastMeasurements(placeName) {
-      setInterval(function () {
+      setInterval(function() {
         var req = new XMLHttpRequest();
         req.onreadystatechange = function () {
           if (req.readyState === 4 && req.status === 200) {
-            console.log(placeName);
             var lines = req.responseText.split("\n");
             $("#" + placeName + " > .temperature")[0].innerHTML = "Temperatura: " + lines[0];
             $("#" + placeName + " > .humidity")[0].innerHTML = "Wilgotność: " + lines[1];
@@ -28,7 +26,7 @@
     }
 
     function loadLastMovement(placeName) {
-      setInterval(function () {
+      setInterval(function() {
         var req = new XMLHttpRequest();
         req.onreadystatechange = function () {
           if (req.readyState === 4 && req.status === 200) {
@@ -39,8 +37,8 @@
         req.send();
       }, 1500);
     }
-
   </script>
+  <script src="chartkick.js"></script>
 </head>
 <body>
 <div id="rooms">
@@ -51,10 +49,8 @@
     <div class="status">Wczytywanie statusu...</div>
     <div class="date">Wczytywanie daty...</div>
     <div class="ip">Wczytywanie adresu IP...</div>
-    <script type="text/javascript">
+    <script>
       loadLastMeasurements("room1");
-    </script>    
-    <script type="text/javascript">
       setTimeout(function () {
         loadLastMovement("room1");
       }, 200);
@@ -68,12 +64,10 @@
     <div class="status">Wczytywanie statusu...</div>
     <div class="date">Wczytywanie daty...</div>
     <div class="ip">Wczytywanie adresu IP...</div>
-    <script type="text/javascript">
+    <script>
       setTimeout(function () {
         loadLastMeasurements("room2");
       }, 400);
-    </script>    
-    <script type="text/javascript">
       setTimeout(function () {
         loadLastMovement("room2");
       }, 600);
@@ -87,12 +81,10 @@
     <div class="status">Wczytywanie statusu...</div>
     <div class="date">Wczytywanie daty...</div>
     <div class="ip">Wczytywanie adresu IP...</div>
-    <script type="text/javascript">
+    <script>
       setTimeout(function () {
         loadLastMeasurements("room3");
       }, 800);
-    </script>
-    <script type="text/javascript">
       setTimeout(function () {
         loadLastMovement("room3");
       }, 1000);
