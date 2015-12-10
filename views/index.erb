@@ -15,7 +15,7 @@
             var lines = req.responseText.split("\n");
             $("#" + placeName + " > .temperature")[0].innerHTML = "Temperatura: " + lines[0];
             $("#" + placeName + " > .humidity")[0].innerHTML = "Wilgotność: " + lines[1];
-            $("#" + placeName + " > .status")[0].innerHTML = "Status czujnika: " + lines[2];
+            $("#" + placeName + " > .status")[0].innerHTML = "Status czujników: " + lines[2];
             $("#" + placeName + " > .date")[0].innerHTML = "Odebrano: " + lines[3];
             $("#" + placeName + " > .ip")[0].innerHTML = "Z adresu IP: " + lines[4];
           }
@@ -51,9 +51,8 @@
     <div class="ip">Wczytywanie adresu IP...</div>
     <script>
       loadLastMeasurements("room1");
-      setTimeout(function () {
         loadLastMovement("room1");
-      }, 200);
+
     </script>
   </div>
 
@@ -65,12 +64,8 @@
     <div class="date">Wczytywanie daty...</div>
     <div class="ip">Wczytywanie adresu IP...</div>
     <script>
-      setTimeout(function () {
         loadLastMeasurements("room2");
-      }, 400);
-      setTimeout(function () {
         loadLastMovement("room2");
-      }, 600);
     </script>
   </div>
 
@@ -82,12 +77,8 @@
     <div class="date">Wczytywanie daty...</div>
     <div class="ip">Wczytywanie adresu IP...</div>
     <script>
-      setTimeout(function () {
         loadLastMeasurements("room3");
-      }, 800);
-      setTimeout(function () {
         loadLastMovement("room3");
-      }, 1000);
     </script>
   </div>
 </div>
@@ -105,8 +96,6 @@
   <% end %>
 </ul>
 <hr>
-
-
 <%= column_chart @data_for_chart, height: "500px" %>
 <%= column_chart @average_by_day, height: "500px" %>
 <pre>
