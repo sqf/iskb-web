@@ -13,8 +13,8 @@
         req.onreadystatechange = function () {
           if (req.readyState === 4 && req.status === 200) {
             var lines = req.responseText.split("\n");
-            $("#" + placeName + " > .temperature")[0].innerHTML = "Temperatura: " + lines[0];
-            $("#" + placeName + " > .humidity")[0].innerHTML = "Wilgotność: " + lines[1];
+            $("#" + placeName + " > .temperature")[0].innerHTML = "Temperatura: " + lines[0] + " \u2103";
+            $("#" + placeName + " > .humidity")[0].innerHTML = "Wilgotność: " + lines[1] + " %";
             $("#" + placeName + " > .status")[0].innerHTML = "Status czujników: " + lines[2];
             $("#" + placeName + " > .date")[0].innerHTML = "Odebrano: " + lines[3];
             $("#" + placeName + " > .ip")[0].innerHTML = "Z adresu IP: " + lines[4];
@@ -51,8 +51,7 @@
     <div class="ip">Wczytywanie adresu IP...</div>
     <script>
       loadLastMeasurements("room1");
-        loadLastMovement("room1");
-
+      loadLastMovement("room1");
     </script>
   </div>
 
@@ -64,8 +63,8 @@
     <div class="date">Wczytywanie daty...</div>
     <div class="ip">Wczytywanie adresu IP...</div>
     <script>
-        loadLastMeasurements("room2");
-        loadLastMovement("room2");
+      loadLastMeasurements("room2");
+      loadLastMovement("room2");
     </script>
   </div>
 
@@ -77,8 +76,8 @@
     <div class="date">Wczytywanie daty...</div>
     <div class="ip">Wczytywanie adresu IP...</div>
     <script>
-        loadLastMeasurements("room3");
-        loadLastMovement("room3");
+      loadLastMeasurements("room3");
+      loadLastMovement("room3");
     </script>
   </div>
 </div>
@@ -92,7 +91,6 @@
     <%= measurement.created_at %>
     <a href="destroyMeasurement?id=<%= measurement.id %>" style="font-size: small; color: blue;">Usuń</a>
   </li>
-
   <% end %>
 </ul>
 <hr>

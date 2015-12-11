@@ -9,7 +9,7 @@ require 'pry'
 get '/' do
   @measurements = Measurement.all
   @data_for_chart = Measurement.pluck(:created_at, :temperature)
-  @average_by_date = Measurement.group_by_day(:created_at).average(:temperature).to_a #.collect { |a| [a[0].to_s,a[1].to_f] }
+  @average_by_date = Measurement.group_by_day(:created_at).average(:temperature)#.collect { |a| [a[0].to_s,a[1].to_f] }
   erb :index
 end
 counter = 0
@@ -28,10 +28,9 @@ post '/measurement' do
       :place_name => @place_name)
     counter = 0;
   end
-  cDegree = "\u2103"
   open("public/" + @place_name + "-lastMeasurements.txt", "w") do |f|
-    f.puts "#{@temperature} #{cDegree.force_encoding('utf-8')}"
-    f.puts "#{@humidity} %"
+    f.puts "#{@temperature}"
+    f.puts "#{@humidity}"
     f.puts "#{@status}"
     f.puts "#{Time.now}"
     f.puts "#{request.ip}"
