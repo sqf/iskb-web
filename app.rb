@@ -8,7 +8,12 @@ require 'pry'
 
 get '/' do
   @measurements = Measurement.all
-  @data_for_chart = Measurement.pluck(:created_at, :temperature)
+  @chart_room1_temp = Measurement.where(:place_name=> "room1").pluck(:created_at, :temperature) # substring(:temperature, 1, 10)
+  @chart_room2_temp = Measurement.where(:place_name=> "room2").pluck(:created_at, :temperature)
+  @chart_room3_temp = Measurement.where(:place_name=> "room3").pluck(:created_at, :temperature)
+  @chart_room1_humi = Measurement.where(:place_name=> "room1").pluck(:created_at, :humidity)
+  @chart_room2_humi = Measurement.where(:place_name=> "room2").pluck(:created_at, :humidity)
+  @chart_room3_humi = Measurement.where(:place_name=> "room3").pluck(:created_at, :humidity)
   @average_by_date = Measurement.group_by_day(:created_at).average(:temperature)#.collect { |a| [a[0].to_s,a[1].to_f] }
   erb :index
 end

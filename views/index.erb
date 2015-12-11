@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
   <title>Temperatura</title>
@@ -20,7 +20,7 @@
             $("#" + placeName + " > .ip")[0].innerHTML = "Z adresu IP: " + lines[4];
           }
         }
-        req.open("POST", placeName + "-lastMeasurements.txt", true);
+        req.open("GET", placeName + "-lastMeasurements.txt", true);
         req.send();
       }, 1500);
     }
@@ -33,7 +33,7 @@
             $("#" + placeName + " > .dateOfMovement")[0].innerHTML = "Ostatni ruch: " + req.responseText;
           }
         }
-        req.open("POST", placeName + "-lastMovement.txt", true);
+        req.open("GET", placeName + "-lastMovement.txt", true);
         req.send();
       }, 1500);
     }
@@ -94,8 +94,14 @@
   <% end %>
 </ul>
 <hr>
-<%= column_chart @data_for_chart, height: "500px" %>
-<%= column_chart @average_by_day, height: "500px" %>
+<h3>Temperatura:</h3>
+<%= column_chart @chart_room1_temp, height: "500px" %>
+<%= column_chart @chart_room2_temp, height: "500px" %>
+<%= column_chart @chart_room3_temp, height: "500px" %>
+<h3>Wilgotność:</h3>
+<%= column_chart @chart_room1_humi, height: "500px" %>
+<%= column_chart @chart_room2_humi, height: "500px" %>
+<%= column_chart @chart_room3_humi, height: "500px" %>
 <pre>
 <%= @average_by_day.to_s %>
 </pre>
